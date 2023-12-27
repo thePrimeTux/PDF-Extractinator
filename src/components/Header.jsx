@@ -4,8 +4,7 @@ function Header() {
   return (
     <header>
       <h1>
-        {/* <HighlightIcon /> */}
-        PDF Page Extractinator
+        PDF Extractinator
       </h1>
     </header>
   );

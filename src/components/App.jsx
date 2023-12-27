@@ -1,7 +1,9 @@
-import React,{useState, useRef} from "react";
+import React,{useState,  useRef} from "react";
 import Header from "./Header"
 import Upload from "./Upload"
-// import { PDFDocument } from "pdf-lib";
+import Input from "./Input";
+import Footer from "./Footer"
+import { PDFDocument } from "pdf-lib";
 import { Document, Page, pdfjs } from 'react-pdf';
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
@@ -11,11 +13,32 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 function App () {
     const [pdfFile, setPdfFile] = useState();
-    const [numPages, setNumPages] = useState(null);
-    const inputFile = useRef(null);
-    var zI=[true];
-    var index = [];
+    const [numPages, setNumPages] = useState();
+    const [text, setText] = useState('');
+    const [zI, setZI] = useState([]);
+    const inputFile = useRef();
 
+    // --------To display the checkmark over pages--------
+    function modifyOverlay() {
+        const indexTrue=[];
+        const indexFalse=[]
+        for (let i = 0; i < zI.length; i++) {
+            if (zI[i] === true) {
+            indexTrue.push(i+1);
+            } else {
+                indexFalse.push(i+1);
+            }
+        }
+
+        indexTrue.forEach((element) => {
+            document.getElementById(element).style.zIndex=1;
+        })
+        indexFalse.forEach((element) => {
+            document.getElementById(element).style.zIndex=-1;
+        })
+    }
+
+    // --------To handle the file upload--------
     const handleChange = (event) => {
         const selectedFile = event.target.files[0];
         setPdfFile(selectedFile);
@@ -24,40 +47,6 @@ function App () {
     const onDocumentLoadSuccess = ({ numPages }) => {
         setNumPages(numPages);
     };
-
-    function handleText (event) {
-        const newText = event.target.value;
-        getIndex(newText);
-        displayOverlay();
-    }
-
-    function getIndex(newText) {
-        var temp = newText.split(',');
-        const pgNo = temp.reduce((acc, cur) => {
-        if (cur.includes('-')) {
-            const [start, end] = cur.split('-').map(Number);
-            for (let i = start; i <= end; i++) {
-                acc.push(i);
-            }
-        } else {
-            acc.push(Number(cur));
-        }
-        return acc; 
-        }, []);
-        index = pgNo.filter((num, index, arr) => {
-            return pgNo.indexOf(num) === index && num < zI.length && num !==0;
-        });
-
-    }
-
-    function displayOverlay(){
-        index.forEach((element) => {
-            if(zI[element-1]){
-                document.getElementById(element).style.zIndex=1;
-                zI[element-1] = !zI[element-1];
-            }
-        })
-    }
 
     function onLoadError(error) {
         alert("Only .pdf files are supported! :P")
@@ -70,34 +59,136 @@ function App () {
         setPdfFile(null);
         console.log(error);
     }
+    
+    // --------To handle page number insertion in the text box--------
+    function handleText (event) {
+        const newText = event.target.value;
+        setText(newText);
+        updateZI(newText);
+        modifyOverlay();
+    }
 
+    function updateZI(newText) {
+        var parts = newText.split(',');
+        const pgNo = parts.reduce((acc, cur) => {
+        if (cur.includes('-')) {
+            const [start, end] = cur.split('-').map(Number);
+            for (let i = start; i <= end; i++) {
+                acc.push(i);
+            }
+        } else {
+            acc.push(Number(cur));
+        }
+        return acc; 
+        }, []);
+
+        var pos = pgNo;
+        pos = pos.filter((num, i, arr) => {
+            return pos.indexOf(num) === i && num <= zI.length && num !==0;
+        });
+        pos.sort((a, b) => a-b);
+
+        var temp = zI;
+        pos.forEach((element) => {
+            temp[element-1] = true;
+        })
+        setZI(temp);
+    }
+
+    // --------To display checkmark on the pages that the user clicks on--------
+    function handleClick (pageNumber) {
+        const temp = zI;
+        temp[pageNumber-1] = !temp[pageNumber-1];
+        console.log(temp);
+        setZI(temp);
+        console.log(zI);
+        modifyOverlay();
+    }
+
+    // --------To get the index of the pages that the user has selected--------
+    function getIndex() {
+        const index = [];
+        for (let i = 0; i < zI.length; i++) {
+            if (zI[i] === true) {
+              index.push(i+1);
+            }
+        }
+        return index;
+    }
+    // --------To remove the pages using pdf-lib library--------
+    const removePages = async () => {
+        if (pdfFile) {
+            try {
+                var temp = getIndex();
+                temp.sort((a, b) => b-a);
+
+                const reader = new FileReader();
+                reader.onload = async () => {
+                  const pdfBytes = new Uint8Array(reader.result);
+          
+                  try {
+                    const pdfDoc = await PDFDocument.load(pdfBytes);
+                    temp.forEach((pgNo) => {
+                        pdfDoc.removePage(pgNo-1);
+                    });
+
+                    const pageCount = pdfDoc.getPageCount();                    
+                    
+                    const modifiedPdfBytes = await pdfDoc.save();
+
+                    const uint8ArrayToFile = (uint8Array, fileName, fileType) => {
+                        const blob = new Blob([uint8Array], { type: fileType });
+                        const file = new File([blob], fileName, { lastModified: new Date().getTime() });
+                        return file;
+                    };
+
+                    temp = [];
+                    setZI(temp);
+
+                    const pdf = uint8ArrayToFile(modifiedPdfBytes, 'modified.pdf', 'application/pdf');
+                    setPdfFile(pdf);
+                    setNumPages(pageCount);
+                  } catch (error) {
+                    console.error('Error removing pages:', error);
+                  }
+                };
+                reader.readAsArrayBuffer(pdfFile); // Start reading the file
+              } catch (error) {
+                console.error('FileReader error:', error);
+              }
+        }
+        setText('');
+    }
+    // --------To display the pages of the PDF file using react-pdf library--------
     const renderPages = () => {
         const pages = [];
+        const temp = [];
         for (let pageNumber = 1; pageNumber <= numPages; pageNumber++) {
-            zI.push(true);
+            temp.push(false);
             pages.push(
-                <div className="card">
-                    <div id={pageNumber} className="overlay" >
-                        <span className="tick">&#10003;</span>
+                <div key={pageNumber+"@"} className="card">
+                    <div key={pageNumber+"#"} id={pageNumber} className="overlay" >
+                        <span key={pageNumber+"_"} className="tick">&#10003;</span>
                     </div>
                     <button 
                         key={pageNumber} 
                         className="page" 
                         style={{ marginBottom: '20px', zIndex: -1}} 
-                        onClick={() => {
-                            zI[pageNumber-1] = !zI[pageNumber-1];
-                            document.getElementById(pageNumber).style.zIndex=zI[pageNumber-1]?-1:1;
-                        }}>
+                        onClick={() => handleClick(pageNumber)}>
                         <Page pageNumber={pageNumber} renderTextLayer={false}/>
                     </button>
                 </div>
             );
-            }
+        }
+        if(zI.length<numPages){
+            setZI(temp);
+        }
         return pages;
     };
 
+    // --------HTML elements--------
     return(
-        <div>
+        <div className="main">
             <Header />
             {!pdfFile && <Upload handleChange={handleChange} inputFile={inputFile}/> }
             <div id="previewPdf">
@@ -110,34 +201,18 @@ function App () {
                             onLoadSuccess={onDocumentLoadSuccess}
                             onLoadError={onLoadError}
                             onSourceError={onSourceError}>
-                            <div className="flexContainer">
+                            <div key="flexContainer" className="flexContainer">
                                 {numPages && renderPages()}
                             </div>
                         </Document>
                         </div>
-                        <div className="input">
-                            <div className="btn_box box">
-                                <button className= "extract_btn btn" 
-                                    type="button">
-                                    Extract Pages
-                                </button>
-                            </div>
-                            <div className="heading2">
-                                <h2>Enter Page Numbers to extract:</h2>
-                            </div>
-                            <div className="text_box">
-                                <input
-                                    type="text"
-                                    placeholder="eg: 1, 2-5."
-                                    onInput={handleText}
-                                />
-                            </div>
-                        </div>
+                        <Input txt={text} textHandle={handleText} deletePage={removePages}/>
                     </div>
                 )}
             </div>
+            <Footer />
         </div>
     )
 }
 
-export default App
+export default App;
