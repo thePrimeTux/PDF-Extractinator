@@ -16,4 +16,8 @@ The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
 ## Output
-![Output Image](/Output/1.jpg "Output 1"))
+![Output Image](/Output/1.jpg "Output 1")
+![Output Image](/Output/2.jpg "Output 2")
+![Output Image](/Output/3.jpg "Output 3")
+![Output Image](/Output/4.jpg "Output 4")
+![Output Image](/Output/5.jpg "Output 5")
