@@ -49,6 +49,13 @@ footer p {
     align-items: center; 
 }
 
+.download_btn_container {   
+    height: 20vh;
+    display: flex;  
+    justify-content: center;  
+    align-items: center; 
+}
+
 .btn {
     color: black;
     font-weight: bold;
@@ -89,7 +96,6 @@ footer p {
     grid-column-end: 1;
     grid-row-start: 1;
     grid-row-end: 1;
-    /* margin-top: -45px; */
 }
 
 .text_box {
@@ -97,7 +103,6 @@ footer p {
     grid-column-end: 1;
     grid-row-start: 2;
     grid-row-end: 2;
-    /* margin-top: -55px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
