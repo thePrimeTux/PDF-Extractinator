@@ -89,7 +89,7 @@ footer p {
     grid-column-end: 1;
     grid-row-start: 1;
     grid-row-end: 1;
-    margin-top: -45px;
+    /* margin-top: -45px; */
 }
 
 .text_box {
@@ -97,7 +97,7 @@ footer p {
     grid-column-end: 1;
     grid-row-start: 2;
     grid-row-end: 2;
-    margin-top: -55px;
+    /* margin-top: -55px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -136,19 +136,19 @@ h2 {
     position: relative;
 }
 
-.overlay{
+.overlay {
     position: absolute;
     top: 33%;
     left: 40%;
 }
 
-.tick{
+.tick {
     font-size: 500%;
 }
 
-/* a, .linkAnnotation{
+a, .linkAnnotation{
     display: none;
-} */
+}
 
 @media (max-width: 600px) {
     .input {

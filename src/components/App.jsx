@@ -16,6 +16,7 @@ function App () {
     const [numPages, setNumPages] = useState();
     const [text, setText] = useState('');
     const [zI, setZI] = useState([]);
+    const [isExtracting, setIsExtracting] = useState(true);
     const inputFile = useRef();
 
     // --------To display the checkmark over pages--------
@@ -65,7 +66,7 @@ function App () {
         const newText = event.target.value;
         setText(newText);
         updateZI(newText);
-        modifyOverlay();
+        modifyOverlay();       
     }
 
     function updateZI(newText) {
@@ -99,9 +100,7 @@ function App () {
     function handleClick (pageNumber) {
         const temp = zI;
         temp[pageNumber-1] = !temp[pageNumber-1];
-        console.log(temp);
         setZI(temp);
-        console.log(zI);
         modifyOverlay();
     }
 
@@ -117,48 +116,67 @@ function App () {
     }
     // --------To remove the pages using pdf-lib library--------
     const removePages = async () => {
-        if (pdfFile) {
-            try {
-                var temp = getIndex();
-                temp.sort((a, b) => b-a);
+        if (isExtracting) {
+            if (pdfFile) {
+                try {
+                    const pagesToRemove = getIndex();
+                    var pagesToKeep = [];
+                    for(let i = 1; i <= numPages; i++){
+                        if(!pagesToRemove.includes(i)){
+                            pagesToKeep.push(i);
+                        }
+                    }
+                    pagesToKeep.sort((a, b) => b-a);
 
-                const reader = new FileReader();
-                reader.onload = async () => {
-                  const pdfBytes = new Uint8Array(reader.result);
-          
-                  try {
-                    const pdfDoc = await PDFDocument.load(pdfBytes);
-                    temp.forEach((pgNo) => {
-                        pdfDoc.removePage(pgNo-1);
-                    });
+                    const reader = new FileReader();
+                    reader.onload = async () => {
+                    const pdfBytes = new Uint8Array(reader.result);
+            
+                    try {
+                        const pdfDoc = await PDFDocument.load(pdfBytes);
+                        pagesToKeep.forEach((pgNo) => {
+                            pdfDoc.removePage(pgNo-1);
+                        });
 
-                    const pageCount = pdfDoc.getPageCount();                    
-                    
-                    const modifiedPdfBytes = await pdfDoc.save();
+                        const pageCount = pdfDoc.getPageCount();                    
+                        
+                        const modifiedPdfBytes = await pdfDoc.save();
 
-                    const uint8ArrayToFile = (uint8Array, fileName, fileType) => {
-                        const blob = new Blob([uint8Array], { type: fileType });
-                        const file = new File([blob], fileName, { lastModified: new Date().getTime() });
-                        return file;
+                        const uint8ArrayToFile = (uint8Array, fileName, fileType) => {
+                            const blob = new Blob([uint8Array], { type: fileType });
+                            const file = new File([blob], fileName, { lastModified: new Date().getTime() });
+                            return file;
+                        };
+
+                        pagesToKeep = [];
+                        setZI(pagesToKeep);
+
+                        const pdf = uint8ArrayToFile(modifiedPdfBytes, 
+                                                    pdfFile.name.split('.')[0]+'_modified.pdf', 
+                                                    'application/pdf');
+                        setPdfFile(pdf);
+                        setNumPages(pageCount);
+                    } catch (error) {
+                        console.error('Error removing pages:', error);
+                    }
                     };
-
-                    temp = [];
-                    setZI(temp);
-
-                    const pdf = uint8ArrayToFile(modifiedPdfBytes, 'modified.pdf', 'application/pdf');
-                    setPdfFile(pdf);
-                    setNumPages(pageCount);
-                  } catch (error) {
-                    console.error('Error removing pages:', error);
-                  }
-                };
-                reader.readAsArrayBuffer(pdfFile); // Start reading the file
-              } catch (error) {
-                console.error('FileReader error:', error);
-              }
+                    reader.readAsArrayBuffer(pdfFile); // Start reading the file
+                } catch (error) {
+                    console.error('FileReader error:', error);
+                }
+                setIsExtracting(false); 
+            }
+        } else {
+            const link = document.getElementById('link');
+            link.click();
+            setPdfFile();
+            setNumPages();
+            setZI([]);
+            setIsExtracting(true);
         }
         setText('');
     }
+    
     // --------To display the pages of the PDF file using react-pdf library--------
     const renderPages = () => {
         const pages = [];
@@ -206,7 +224,13 @@ function App () {
                             </div>
                         </Document>
                         </div>
-                        <Input txt={text} textHandle={handleText} deletePage={removePages}/>
+                        <Input txt={text} 
+                            textHandle={handleText} 
+                            deletePage={removePages} 
+                            isExtract={isExtracting} 
+                            fileName={pdfFile.name}
+                            URL={URL.createObjectURL(pdfFile)}
+                            />
                     </div>
                 )}
             </div>
