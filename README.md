@@ -6,7 +6,7 @@ A website to extract pages from a PDF file and download a new PDF containing the
 Download the directory and paste the files inside a folder called "my-app"
 
 ### `cd my-app`
-### 'npm install'
+### `npm install`
 ### `npm start`
 
 Runs the app in the development mode.\
