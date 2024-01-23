@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/PDF-Extractinator/static/css/main.b2783fbb.css",
-    "main.js": "/PDF-Extractinator/static/js/main.5162af66.js",
-    "static/media/pdf.worker.min.js": "/PDF-Extractinator/static/media/pdf.worker.min.c1e2425e7a70112d0679.js",
-    "index.html": "/PDF-Extractinator/index.html",
-    "main.b2783fbb.css.map": "/PDF-Extractinator/static/css/main.b2783fbb.css.map",
-    "main.5162af66.js.map": "/PDF-Extractinator/static/js/main.5162af66.js.map"
+    "main.css": "/static/css/main.b2783fbb.css",
+    "main.js": "/static/js/main.c2615d1e.js",
+    "static/media/pdf.worker.min.js": "/static/media/pdf.worker.min.c1e2425e7a70112d0679.js",
+    "index.html": "/index.html",
+    "main.b2783fbb.css.map": "/static/css/main.b2783fbb.css.map",
+    "main.c2615d1e.js.map": "/static/js/main.c2615d1e.js.map"
   },
   "entrypoints": [
     "static/css/main.b2783fbb.css",
-    "static/js/main.5162af66.js"
+    "static/js/main.c2615d1e.js"
   ]
 }
