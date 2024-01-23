@@ -32,7 +32,7 @@ function Input (props) {
 
              {/* --------Download-------- */}
             {!props.isExtract && (
-                <div className="btn_container box">
+                <div className="download_btn_container box">
                         <button className= "download_btn btn" 
                             type="button"
                             onClick={props.deletePage}>

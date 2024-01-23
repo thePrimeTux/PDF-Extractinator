@@ -2,10 +2,11 @@ import React from "react";
 
 function Header() {
   return (
-    <header>
+    <header className="header">
       <h1>
         PDF Extractinator
       </h1>
+      <button className="login">Login</button>
     </header>
   );
 }

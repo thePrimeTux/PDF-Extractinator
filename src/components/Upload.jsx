@@ -7,7 +7,7 @@ function Upload(props) {
                     <h1 className="heading">Extract PDF pages</h1>
                 </div>
             <div id="content" className="content text">
-                <p>Select and extract the PDF pages you need. Get a new file with your extracted pages.</p>
+                <p>Select and extract pages from your PDF file. Download a PDF containing the extracted pages</p>
             </div>
             <div id="upload" className="btn_container">
                 <button className= "upload_btn btn" 

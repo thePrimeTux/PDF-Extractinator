@@ -2,7 +2,7 @@ import React,{useState,  useRef} from "react";
 import Header from "./Header"
 import Upload from "./Upload"
 import Input from "./Input";
-import Footer from "./Footer"
+import Footer from "./Footer";
 import { PDFDocument } from "pdf-lib";
 import { Document, Page, pdfjs } from 'react-pdf';
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
@@ -114,6 +114,7 @@ function App () {
         }
         return index;
     }
+    
     // --------To remove the pages using pdf-lib library--------
     const removePages = async () => {
         if (isExtracting) {
@@ -130,35 +131,35 @@ function App () {
 
                     const reader = new FileReader();
                     reader.onload = async () => {
-                    const pdfBytes = new Uint8Array(reader.result);
-            
-                    try {
-                        const pdfDoc = await PDFDocument.load(pdfBytes);
-                        pagesToKeep.forEach((pgNo) => {
-                            pdfDoc.removePage(pgNo-1);
-                        });
+                        const pdfBytes = new Uint8Array(reader.result);
+                
+                        try {
+                            const pdfDoc = await PDFDocument.load(pdfBytes);
+                            pagesToKeep.forEach((pgNo) => {
+                                pdfDoc.removePage(pgNo-1);
+                            });
 
-                        const pageCount = pdfDoc.getPageCount();                    
-                        
-                        const modifiedPdfBytes = await pdfDoc.save();
+                            const pageCount = pdfDoc.getPageCount();                    
+                            
+                            const modifiedPdfBytes = await pdfDoc.save();
 
-                        const uint8ArrayToFile = (uint8Array, fileName, fileType) => {
-                            const blob = new Blob([uint8Array], { type: fileType });
-                            const file = new File([blob], fileName, { lastModified: new Date().getTime() });
-                            return file;
-                        };
+                            const uint8ArrayToFile = (uint8Array, fileName, fileType) => {
+                                const blob = new Blob([uint8Array], { type: fileType });
+                                const file = new File([blob], fileName, { lastModified: new Date().getTime() });
+                                return file;
+                            };
 
-                        pagesToKeep = [];
-                        setZI(pagesToKeep);
+                            pagesToKeep = [];
+                            setZI(pagesToKeep);
 
-                        const pdf = uint8ArrayToFile(modifiedPdfBytes, 
-                                                    pdfFile.name.split('.')[0]+'_modified.pdf', 
-                                                    'application/pdf');
-                        setPdfFile(pdf);
-                        setNumPages(pageCount);
-                    } catch (error) {
-                        console.error('Error removing pages:', error);
-                    }
+                            const pdf = uint8ArrayToFile(modifiedPdfBytes, 
+                                                        pdfFile.name.split('.')[0]+'_modified.pdf', 
+                                                        'application/pdf');
+                            setPdfFile(pdf);
+                            setNumPages(pageCount);
+                        } catch (error) {
+                            console.error('Error removing pages:', error);
+                        }
                     };
                     reader.readAsArrayBuffer(pdfFile); // Start reading the file
                 } catch (error) {
@@ -193,12 +194,12 @@ function App () {
                         className="page" 
                         style={{ marginBottom: '20px', zIndex: -1}} 
                         onClick={() => handleClick(pageNumber)}>
-                        <Page pageNumber={pageNumber} renderTextLayer={false}/>
+                    <Page pageNumber={pageNumber} renderTextLayer={false}/>
                     </button>
                 </div>
             );
         }
-        if(zI.length<numPages){
+        if(zI.length < numPages){
             setZI(temp);
         }
         return pages;

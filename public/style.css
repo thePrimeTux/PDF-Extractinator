@@ -42,12 +42,33 @@ footer p {
     font-size: calc(10px + 1.2vw);
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.login {
+    align-self: center;
+    height: 3rem;
+    width: 6rem;
+    border-radius: 5px;
+    border-color: grey;
+}
+
 .btn_container {   
     height: 30vh;
     display: flex;  
     justify-content: center;  
     align-items: center; 
 }
+
+.download_btn_container {   
+    height: 20vh;
+    display: flex;  
+    justify-content: center;  
+    align-items: center; 
+}
+
 
 .btn {
     color: black;
