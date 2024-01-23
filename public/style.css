@@ -11,7 +11,7 @@ header {
   
 header h1 {
     color: #fff;
-    font-family: "McLaren", cursive;
+    font-family: 'McLaren', sans-serif;
     font-weight: 200;
 }
 
@@ -69,10 +69,12 @@ footer p {
     align-items: center; 
 }
 
-<<<<<<< HEAD
+.login {
+    background-color: white;
+    border: none;
+    margin-right: 2%;
+}
 
-=======
->>>>>>> 2c1cbbe1ff0a112e6f9bb69929e89e9b47e4d4d5
 .btn {
     color: black;
     font-weight: bold;
