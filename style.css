@@ -1,0 +1,211 @@
+body {
+    background-color: #5E5A4D;
+}
+
+header {
+    background-color: #f5ba13;
+    margin: -16px -16px;
+    padding: 16px 32px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  }
+  
+header h1 {
+    color: #fff;
+    font-family: "McLaren", cursive;
+    font-weight: 200;
+}
+
+footer {
+    position: relative;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+}
+
+footer p {
+    color: #ccc;
+}
+
+.text {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    text-align: center;
+}
+
+.title {
+    font-size: calc(12px + 1.4vw);
+    padding-top: 10px;
+}
+
+.content {
+    font-size: calc(10px + 1.2vw);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.login {
+    align-self: center;
+    height: 3rem;
+    width: 6rem;
+    border-radius: 5px;
+    border-color: grey;
+}
+
+.btn_container {   
+    height: 30vh;
+    display: flex;  
+    justify-content: center;  
+    align-items: center; 
+}
+
+.download_btn_container {   
+    height: 20vh;
+    display: flex;  
+    justify-content: center;  
+    align-items: center; 
+}
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> 2c1cbbe1ff0a112e6f9bb69929e89e9b47e4d4d5
+.btn {
+    color: black;
+    font-weight: bold;
+    font-size: 24px;
+    min-height: 80px;
+    min-width: 330px;
+    max-width: 60vw; 
+    background-color: #f5ba13;
+    transition: .1s;
+    border: 0; 
+    border-radius: 12px;
+    box-shadow: 0 3px 6px rgba(0,0,0,.14);  
+}
+
+.btn:hover {
+    background: #f5b913bf;
+} 
+
+.input {
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: 250px 320px;
+    grid-template-rows: 30px 30px;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn_box {
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.heading2 {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 1;
+}
+
+.text_box {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+#pdfInput {
+    display: none;
+}
+
+.react-pdf__Page__canvas {
+    margin: 25px auto;
+    width: auto !important;
+    height: 300px !important;
+}
+
+.flexContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.page {
+    height: 100%;
+    background-color: white;
+    border: 0;
+}
+
+.card {
+    width: auto;
+    height: auto;
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 33%;
+    left: 40%;
+}
+
+.tick {
+    font-size: 500%;
+}
+
+a, .linkAnnotation{
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .input {
+        margin-top: 100px;
+        display: grid;
+        grid-template-columns: 320px;
+        grid-template-rows: 30px 30px 60px;
+        gap: 5px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn_box {
+        grid-column-start: 1;
+        grid-column-end: 1;
+        grid-row-start: 3;
+        grid-row-end: 3;
+    }
+    
+    .heading2 {
+        grid-column-start: 1;
+        grid-column-end: 1;
+        grid-row-start: 1;
+        grid-row-end: 1;
+        margin-top: -45px;
+    }
+    
+    .text_box {
+        grid-column-start: 1;
+        grid-column-end: 1;
+        grid-row-start: 2;
+        grid-row-end: 2;
+        margin-top: -55px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
