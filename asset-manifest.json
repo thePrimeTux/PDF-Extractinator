@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/%3Chttps://theprimetux.github.io/PDF-Extractinator/%3E/static/css/main.1fe94aec.css",
-    "main.js": "/%3Chttps://theprimetux.github.io/PDF-Extractinator/%3E/static/js/main.ba0a2034.js",
-    "static/media/pdf.worker.min.js": "/%3Chttps://theprimetux.github.io/PDF-Extractinator/%3E/static/media/pdf.worker.min.c1e2425e7a70112d0679.js",
-    "index.html": "/%3Chttps://theprimetux.github.io/PDF-Extractinator/%3E/index.html",
-    "main.1fe94aec.css.map": "/%3Chttps://theprimetux.github.io/PDF-Extractinator/%3E/static/css/main.1fe94aec.css.map",
-    "main.ba0a2034.js.map": "/%3Chttps://theprimetux.github.io/PDF-Extractinator/%3E/static/js/main.ba0a2034.js.map"
+    "main.css": "/static/css/main.1fe94aec.css",
+    "main.js": "/static/js/main.387fdbfb.js",
+    "static/media/pdf.worker.min.js": "/static/media/pdf.worker.min.c1e2425e7a70112d0679.js",
+    "index.html": "/index.html",
+    "main.1fe94aec.css.map": "/static/css/main.1fe94aec.css.map",
+    "main.387fdbfb.js.map": "/static/js/main.387fdbfb.js.map"
   },
   "entrypoints": [
     "static/css/main.1fe94aec.css",
-    "static/js/main.ba0a2034.js"
+    "static/js/main.387fdbfb.js"
   ]
 }
