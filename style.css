@@ -3,6 +3,8 @@ body {
 }
 
 header {
+    /* display: flex;
+    justify-content: space-between; */
     background-color: #f5ba13;
     margin: -16px -16px;
     padding: 16px 32px;
@@ -157,12 +159,15 @@ h2 {
 
 .overlay {
     position: absolute;
-    top: 33%;
-    left: 40%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .tick {
     font-size: 500%;
+    cursor: default;
+    user-select: none;
 }
 
 a, .linkAnnotation{
