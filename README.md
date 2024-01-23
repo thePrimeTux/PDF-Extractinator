@@ -1,12 +1,12 @@
-<<<<<<< HEAD
-# Getting Started with Create React App
+# PDF-Page-Extractinator
+A website to extract pages from a PDF file and download a new PDF containing the extracted pages.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How to run
 
-## Available Scripts
+Download the directory and paste the files inside a folder called "my-app"
 
-In the project directory, you can run:
-
+### `cd my-app`
+### `npm install`
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -15,61 +15,27 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+## Output
+Initial View of Webpage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Output Image](/Output/1.jpg "Output 1")
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Preview of Uploaded PDF file
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Output Image](/Output/2.jpg "Output 2")
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+Clicking the pages to extract
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![Output Image](/Output/3.jpg "Output 3")
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Typing in the page number/ range of page numbers to extract
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![Output Image](/Output/4.jpg "Output 4")
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Preview of extracted PDF File with a Download button
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-=======
-# PDF-Page-Extractinator
-Website to extract pages from a PDF file.
->>>>>>> 4f9e9fad687ded8b6c52a165d7611aaf7134e407
+![Output Image](/Output/5.jpg "Output 5")
